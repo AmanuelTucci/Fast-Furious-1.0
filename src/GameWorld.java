@@ -2,6 +2,8 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.image.Image;
+
 
 public class GameWorld {
 
@@ -9,21 +11,24 @@ public class GameWorld {
     private int width;
     private int height;
     private AnimationTimer timer;
+    private Image car;
   
     // oggetti e altri attributi del gioco
 
     private boolean gameOver; // se true il gioco è finito
 
-    public GameWorld(GraphicsContext gc, int width, int height) {
-        this.gc = gc;
-        this.width = width;
-        this.height = height;
-	   // Costruisci il setting iniziale del gioco 
-        
-   gameOver = false;
-        createTimer();
-    }
+   public GameWorld(GraphicsContext gc, int width, int height) {
 
+    this.gc = gc;
+    this.width = width;
+    this.height = height;
+
+    car = new Image("file:assets/car.png");
+
+    gameOver = false;
+    createTimer();
+}
+   
     // Il loop infinito che genera i frame del gioco
     // Update: aggiorna i dati
     // Draw: disegna il nuovo frame
@@ -52,17 +57,22 @@ public class GameWorld {
     }
 
     // Disegna il nuovo frame del videogioco
-    private void draw() {
-        gc.setFill(Color.BLACK); // Colora la finestra         
-   gc.fillRect(0, 0, width, height); 
+   private void draw() {
+
+    gc.setFill(Color.BLACK);
+    gc.fillRect(0, 0, width, height);
+
+    // Disegna la macchina
+    gc.drawImage(car, 100, 100, 200, 120);
+
+    if (gameOver) {
+
+    }
+} 
 
        // Disegna dentro alla finestra gli oggetti del gioco         
        
-       if (gameOver) {
-            // Cosa disegnare se il gioco è finito
-        }
-    }
-
+       
     // Cosa succede se premo i vari tasti
     public void onKeyPressed(KeyCode code) {
     	  // TODO
